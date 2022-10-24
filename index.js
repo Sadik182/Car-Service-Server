@@ -24,6 +24,15 @@ async function run() {
     const database = client.db("Genius_Car_DB");
     const dataCollection = database.collection("Services");
     console.log("Databse is Connected");
+
+    app.get('/Services', async(req, res) => {
+      const query = {}
+      const result = await dataCollection.find(query)
+      res.send(result);
+    })
+
+
+
   } finally {
     // client.close();
   }
