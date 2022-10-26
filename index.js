@@ -42,6 +42,18 @@ async function run() {
     });
 
 
+    // Post API 
+
+    app.post('/Services', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: ObjectId(id)}
+      const options = {upsert: true}
+      const doc = {$set: req.body}
+      const result = await dataCollection.insertOne(query, doc, options)
+      res.send(result);
+    })
+
+
 
 
 
