@@ -46,12 +46,28 @@ async function run() {
     // Post API 
 
     app.post('/Services', async(req, res) => {
+      const newServices = req.body;
+      const result = await dataCollection.insertOne(newServices);
+      res.send(result)
+    })
+
+
+    // Update API
+
+    app.put('/Services', async(req, res) => {
       const id = req.params.id;
       const query = {_id: ObjectId(id)}
       const options = {upsert: true}
       const doc = {$set: req.body}
-      const result = await dataCollection.insertOne(query, doc, options)
+      const result = await dataCollection.updateOne(query, doc, options)
       res.send(result);
+    })
+
+    app.delete('Services/:id', async(req, res) => {
+      const id = req.params.id;
+      const query = {_id: ObjectId(id)}
+      const result = await dataCollection.deleteOne(query)
+      res.send(result)
     })
 
 
