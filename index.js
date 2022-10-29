@@ -49,7 +49,7 @@ async function run() {
       const newServices = req.body;
       const result = await dataCollection.insertOne(newServices);
       res.send(result)
-    })
+    });
 
 
     // Update API
@@ -61,14 +61,16 @@ async function run() {
       const doc = {$set: req.body}
       const result = await dataCollection.updateOne(query, doc, options)
       res.send(result);
-    })
+    });
 
-    app.delete('Services/:id', async(req, res) => {
+    //Delete API
+
+    app.delete('/Services/:id', async(req, res) => {
       const id = req.params.id;
       const query = {_id: ObjectId(id)}
       const result = await dataCollection.deleteOne(query)
       res.send(result)
-    })
+    });
 
 
 
